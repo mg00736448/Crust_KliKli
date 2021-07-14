@@ -37,7 +37,7 @@ class KK extends Service {
   }
   async getZip(params: WhereOptions) {
     return await this.ctx.model.Zip.findOne({
-      attributes: ['zip_id', 'cid', 'size', 'status', 'calculated_at', 'expired_on',  'update_time', 'create_time'],
+      attributes: ['zip_id', 'cid', 'size', 'status', 'key', 'iv', 'calculated_at', 'expired_on',  'update_time', 'create_time'],
       where: params
     });
   }

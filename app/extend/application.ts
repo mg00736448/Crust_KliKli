@@ -1,6 +1,7 @@
 import { Application, Singleton } from 'egg';
 import { Redis } from 'ioredis';
 import * as fs from 'fs';
+import * as path from 'path';
 import { create } from 'ipfs-http-client';
 
 const ipfs = create();
@@ -16,8 +17,13 @@ declare module 'egg' {
 
 export default {
     async addIPFS(target: string) {
+        let parsePath = path.parse(target);
         let content = await fs.readFileSync(target);
-        return await ipfs.add(content);
+        let option = {
+            path: `/zips/${parsePath.base}`,
+            content
+        };
+        return await ipfs.add(option);
     },
     async getIPFS(this: Application, cid = '') {
         const content: any = [];
@@ -30,8 +36,8 @@ export default {
         }
         return Buffer.concat(content);
     },
-    async rmIPFS(cid=''){
-        return await ipfs.files.rm(cid);
+    async rmIPFS(path=''){
+        return await ipfs.files.rm(path);
     },
     getRedis(this: Application, name = 'save') {
         return (this.redis as Singleton<Redis>).get(name);

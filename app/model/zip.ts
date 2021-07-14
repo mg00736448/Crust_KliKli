@@ -9,6 +9,8 @@ export default function(app: Application) {
         zip_id: STRING(128),
         cid: STRING(128),
         size: STRING(128),
+        key: STRING(128),
+        iv: STRING(128),
         expired_on: STRING(128),
         calculated_at: STRING(128),
         status: TINYINT,

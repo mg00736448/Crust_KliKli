@@ -22,6 +22,7 @@ export default class ApiController extends Controller {
   public async uploadFile() {
     const { ctx, app, service } = this;
     const { zipSizeLimit } = app.config.crust;
+    const { url } = ctx.request; 
     const fileID = Date.now();
     const stream = await ctx.getFileStream();
     const folder = await app.getRedis('save').get('new_folder') || 'upload_1';
@@ -44,7 +45,7 @@ export default class ApiController extends Controller {
       let totalSize = await app.getRedis('save').incrby('folder_size', writeStream.bytesWritten);
       if (totalSize >= zipSizeLimit) {
         ctx.zip(path.join(__dirname, `../public/${folder}`), app, async (result) => {
-          let { cid, size, zipID } = result;
+          let { cid, size, zipID, key, iv } = result;
           let updateFile = {
             zip_id: zipID,
             status: 1,
@@ -55,6 +56,7 @@ export default class ApiController extends Controller {
             zip_id: zipID,
             cid,
             size,
+            key,iv,
             create_time: now
           };
           await service.kk.saveZip(zipData);
@@ -62,7 +64,11 @@ export default class ApiController extends Controller {
           await app.getRedis('save').publish('news', JSON.stringify(redisSub));
         });
       }
-      await ctx.redirect(`/?fileID=${fileID}`);
+      if(url.match('test')){
+        ctx.redirect(`/?fileID=${fileID}`);
+      }else{
+        ctx.body = { code: 0, result: {fileID} };
+      }
     } catch (err) {
       await sendToWormhole(stream);
       throw (err);

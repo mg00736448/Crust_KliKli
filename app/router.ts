@@ -7,11 +7,13 @@ export default (app: Application) => {
   router.get('/file', home.file);
   router.get('/zip', home.zip);
   
-  router.get('/api/fileList', api.fileList);
-  router.get('/api/zipList', api.zipList);
-  router.post('/api/upload', api.uploadFile);
+
+  router.post('/api/test/upload', api.uploadFile);
+  router.post('/api/test/uploadAPI', api.uploadAPI);
+  router.get('/api/test/fileList', api.fileList);
+  router.get('/api/test/zipList', api.zipList);
+
   router.post('/api/open/upload', api.uploadFile);
-  router.post('/api/open/uploadAPI', api.uploadAPI);
   router.post('/api/open/downFile', api.downFile);
 
 };

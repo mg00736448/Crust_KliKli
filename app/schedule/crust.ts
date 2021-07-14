@@ -17,8 +17,8 @@ class IpfsToCrust extends Subscription {
         const { ctx, app, service } = this;
         try {
             //在crust下单
-            await ctx.crustOrder(ctx, app, service);
-            //检查下单状态
+            await ctx.crustOrder(ctx, app, service, 0);
+            //检查订单存储情况
             await ctx.getCrustOrderState(ctx, app, service);
         } catch (error) {
             ctx.logger.error(error);

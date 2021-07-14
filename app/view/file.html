@@ -130,7 +130,7 @@
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
     </script>
     <script>
-        var url = 'http://127.0.0.1:7001/api/fileList?limit=50&offset=1';
+        var url = 'http://127.0.0.1:7001/api/test/fileList?limit=50&offset=1';
         fetch(url, {
                 method: 'GET',
                 headers: new Headers({
@@ -144,8 +144,8 @@
                 } = response.result;
                 let trHTML = '';
                 rows.forEach(e => {
-                    e.update_time = e.update_time && moment(e.update_time*1000).format('YYYY-MM-DD hh:mm:ss');
-                    e.create_time = e.create_time && moment(e.create_time*1000).format('YYYY-MM-DD hh:mm:ss');
+                    e.update_time = e.update_time && moment(e.update_time*1000).format('YYYY-MM-DD HH:mm:ss');
+                    e.create_time = e.create_time && moment(e.create_time*1000).format('YYYY-MM-DD HH:mm:ss');
                     trHTML += `<tr>
                         <td>${e.file_id}</td>
                         <td>${e.file_type}</td>

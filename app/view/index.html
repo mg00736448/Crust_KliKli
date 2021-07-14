@@ -86,7 +86,7 @@
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">上传文件</h1>
                 </div>
-                <form class="row g-3" action="/api/upload?_csrf={{ ctx.csrf | safe }}" method="POST"
+                <form class="row g-3" action="/api/test/upload?_csrf={{ ctx.csrf | safe }}" method="POST"
                     enctype="multipart/form-data">
                     <div class="col-auto">
                         <input class="form-control" type="file" id="formFile" name="file">

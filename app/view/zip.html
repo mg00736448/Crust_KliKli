@@ -128,7 +128,7 @@
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
     </script>
     <script>
-        var url = 'http://127.0.0.1:7001/api/zipList?limit=50&offset=1';
+        var url = 'http://127.0.0.1:7001/api/test/zipList?limit=50&offset=1';
         fetch(url, {
                 method: 'GET',
                 headers: new Headers({
@@ -140,8 +140,8 @@
                 const { rows } = response.result;
                 let trHTML= '';
                 rows.forEach(e => {
-                    e.update_time = moment(e.update_time*1000).format('YYYY-MM-DD hh:mm:ss');
-                    e.create_time = moment(e.create_time*1000).format('YYYY-MM-DD hh:mm:ss');
+                    e.update_time = e.update_time && moment(e.update_time*1000).format('YYYY-MM-DD HH:mm:ss');
+                    e.create_time = moment(e.create_time*1000).format('YYYY-MM-DD HH:mm:ss');
                     e.expired_time = !(e.expired_on*1) ? 0: moment().add((e.expired_on-e.calculated_at)*6, 's').format('YYYY-MM-DD');
                     trHTML +=`<tr>
                         <td>${e.zip_id}</td>

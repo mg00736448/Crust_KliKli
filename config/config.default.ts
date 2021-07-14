@@ -24,8 +24,9 @@ export default (appInfo: EggAppInfo) => {
     url: 'wss://api.decloudf.com/',
     seeds: 'easy shine timber toe genius wave hover treat nothing mix noble give',
     address: '5CVWAJkmX47r35ZpMwDE14fbuPebHkpJ5Fif9mzct5UTMw9J',
-    zipSizeLimit: 1024*1024*1024*5,
-    expireDate: 60*60*24*7
+    zipSizeLimit: 5*1024*1024*1024,
+    expireDate: 60*60*24*7,
+    replicaCount: 5
   };
   config.security = {
     csrf: {
